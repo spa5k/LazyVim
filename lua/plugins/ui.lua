@@ -28,39 +28,31 @@ return {
                 end,
                 desc = "[/] Fuzzily search in current buffer",
             },
+            { "<leader>sp", "<Cmd>Telescope projects<CR>", desc = "[S]earch [P]rojects" },
         },
         dependencies = {
-            "nvim-telescope/telescope-fzf-native.nvim",
-            build = "make",
-            config = function()
-                require("telescope").load_extension("fzf")
-            end,
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make",
+                config = function()
+                    require("telescope").load_extension("fzf")
+                end,
+            },
+            { 'nvim-telescope/telescope-ui-select.nvim' },
+
+            -- Useful for getting pretty icons, but requires a Nerd Font.
+            { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
         },
-    },
-
-
-    -- the opts function can also be used to change the default opts:
-    {
-        "nvim-lualine/lualine.nvim",
-        event = "VeryLazy",
-        opts = function(_, opts)
-            table.insert(opts.sections.lualine_x, "😄")
-        end,
-    },
-
-    -- or you can return new options to override all the defaults
-    {
-        "nvim-lualine/lualine.nvim",
-        event = "VeryLazy",
-        opts = function()
-            return {
-                --[[add your custom lualine config here]]
+        config = function()
+            require("telescope").setup {
+                extensions = {
+                    ['ui-select'] = {
+                        require('telescope.themes').get_dropdown(),
+                    },
+                },
             }
         end,
     },
-
-    -- use mini.starter instead of alpha
-    -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
 
 
     -- colorschemes area
@@ -97,4 +89,20 @@ return {
             colorscheme = "gruvbox",
         },
     },
+    {
+        'petertriho/nvim-scrollbar',
+        config = function()
+            require('scrollbar').setup()
+        end,
+    },
+    -- lewis6991/satellite.nvim
+    -- {
+    --     "lewis6991/satellite.nvim",
+    --     opts = {}
+    --     config = function()
+    --         require('satellite').setup {
+
+    --         }
+    --     end
+    -- }
 }
