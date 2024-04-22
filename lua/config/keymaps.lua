@@ -18,3 +18,6 @@ end, { expr = true, desc = 'Toggle comment on current/multiple lines' })
 
 -- Visual mode keymap
 vim.keymap.set('x', '<C-_>', '<Plug>(comment_toggle_linewise_visual)', { desc = 'Toggle comment on selected text' })
+
+-- f2 to rename the current keyword under the cursor through lsp
+vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename the current keyword' })

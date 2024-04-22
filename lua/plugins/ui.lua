@@ -43,8 +43,28 @@ return {
             -- Useful for getting pretty icons, but requires a Nerd Font.
             { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
         },
-        config = function()
+        config = function(_, opts)
             require("telescope").setup {
+                defaults = {
+                    layout_config = {
+                        width = 0.9,
+                        height = 0.9,
+                        horizontal = {
+                            prompt_position = "top",
+                            preview_width = 0.55,
+                            results_width = 0.8,
+                        },
+                        vertical = {
+                            mirror = false,
+                        },
+                    },
+                    layout_strategy = "flex",
+                    prompt_prefix = "❯ ",
+                    selection_caret = "❯ ",
+                    sorting_strategy = "ascending",
+                    winblend = 10,
+                },
+
                 extensions = {
                     ['ui-select'] = {
                         require('telescope.themes').get_dropdown(),
