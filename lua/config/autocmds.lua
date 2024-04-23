@@ -11,8 +11,8 @@ api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- close some filetypes with <q>
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
+api.nvim_create_autocmd("FileType", {
+  group = api.nvim_create_augroup("close_with_q", { clear = true }),
   pattern = {
     "PlenaryTestPopup",
     "help",
