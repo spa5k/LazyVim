@@ -26,15 +26,10 @@ return {
                 desc = "[/] Fuzzily search in current buffer",
             },
             { "<leader>sp", "<Cmd>Telescope projects<CR>", desc = "[S]earch [P]rojects" },
+            -- ctrl + shift + p for available commands
+            { "<C-S-p>",    "<Cmd>Telescope commands<CR>", desc = "Search [C]ommands" },
         },
         dependencies = {
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
-                config = function()
-                    require("telescope").load_extension("fzf")
-                end,
-            },
             'nvim-telescope/telescope-ui-select.nvim',
             'kkharji/sqlite.lua',
             'nvim-telescope/telescope-frecency.nvim',
@@ -101,105 +96,107 @@ return {
                     },
                 },
                 pickers = {
-                    find_files = {
-                        previewer = true,
-                        path_display = formattedName,
-                        layout_config = {
-                            height = 0.4,
-                            prompt_position = "top",
-                            preview_cutoff = 120,
-                        },
-                    },
-                    git_files = {
-                        previewer = false,
-                        path_display = formattedName,
-                        layout_config = {
-                            height = 0.4,
-                            prompt_position = "top",
-                            preview_cutoff = 120,
-                        },
-                    },
-                    buffers = {
-                        path_display = formattedName,
-                        mappings = {
-                            i = {
-                                ["<c-d>"] = actions.delete_buffer,
-                            },
-                            n = {
-                                ["<c-d>"] = actions.delete_buffer,
-                            },
-                        },
-                        previewer = true,
-                        initial_mode = "normal",
-                        -- theme = "dropdown",
-                        layout_config = {
-                            height = 0.4,
-                            width = 0.6,
-                            prompt_position = "top",
-                            preview_cutoff = 120,
-                        },
-                    },
-                    current_buffer_fuzzy_find = {
-                        previewer = true,
-                        layout_config = {
-                            prompt_position = "top",
-                            preview_cutoff = 120,
-                        },
-                    },
-                    live_grep = {
-                        only_sort_text = true,
-                        previewer = true,
-                    },
-                    grep_string = {
-                        only_sort_text = true,
-                        previewer = true,
-                    },
-                    lsp_references = {
-                        show_line = false,
-                        previewer = true,
-                    },
-                    treesitter = {
-                        show_line = false,
-                        previewer = true,
-                    },
-                    colorscheme = {
-                        enable_preview = true,
-                    },
-                },
-                extensions = {
-                    fzf = {
-                        fuzzy = true,                   -- false will only do exact matching
-                        override_generic_sorter = true, -- override the generic sorter
-                        override_file_sorter = true,    -- override the file sorter
-                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-                    },
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown({
-                            previewer = true,
-                            initial_mode = "normal",
-                            sorting_strategy = "ascending",
-                            layout_strategy = "horizontal",
-                            layout_config = {
-                                horizontal = {
-                                    width = 0.5,
-                                    height = 0.4,
-                                    preview_width = 0.6,
-                                },
-                            },
-                        }),
-                    },
-                    frecency = {
-                        default_workspace = "CWD",
-                        show_scores = true,
-                        show_unindexed = true,
-                        disable_devicons = false,
-                        ignore_patterns = {
-                            "*.git/*",
-                            "*/tmp/*",
-                            "*/lua-language-server/*",
-                        },
-                    },
-                },
+
+                }
+                --     find_files = {
+                --         previewer = true,
+                --         path_display = formattedName,
+                --         layout_config = {
+                --             height = 0.4,
+                --             prompt_position = "top",
+                --             preview_cutoff = 120,
+                --         },
+                --     },
+                --     git_files = {
+                --         previewer = false,
+                --         path_display = formattedName,
+                --         layout_config = {
+                --             height = 0.4,
+                --             prompt_position = "top",
+                --             preview_cutoff = 120,
+                --         },
+                --     },
+                --     buffers = {
+                --         path_display = formattedName,
+                --         mappings = {
+                --             i = {
+                --                 ["<c-d>"] = actions.delete_buffer,
+                --             },
+                --             n = {
+                --                 ["<c-d>"] = actions.delete_buffer,
+                --             },
+                --         },
+                --         previewer = true,
+                --         initial_mode = "normal",
+                --         -- theme = "dropdown",
+                --         layout_config = {
+                --             height = 0.4,
+                --             width = 0.6,
+                --             prompt_position = "top",
+                --             preview_cutoff = 120,
+                --         },
+                --     },
+                --     current_buffer_fuzzy_find = {
+                --         previewer = true,
+                --         layout_config = {
+                --             prompt_position = "top",
+                --             preview_cutoff = 120,
+                --         },
+                --     },
+                --     live_grep = {
+                --         only_sort_text = true,
+                --         previewer = true,
+                --     },
+                --     grep_string = {
+                --         only_sort_text = true,
+                --         previewer = true,
+                --     },
+                --     lsp_references = {
+                --         show_line = false,
+                --         previewer = true,
+                --     },
+                --     treesitter = {
+                --         show_line = false,
+                --         previewer = true,
+                --     },
+                --     colorscheme = {
+                --         enable_preview = true,
+                --     },
+                -- },
+                -- extensions = {
+                --     fzf = {
+                --         fuzzy = true,                   -- false will only do exact matching
+                --         override_generic_sorter = true, -- override the generic sorter
+                --         override_file_sorter = true,    -- override the file sorter
+                --         case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+                --     },
+                --     ["ui-select"] = {
+                --         require("telescope.themes").get_dropdown({
+                --             previewer = true,
+                --             initial_mode = "normal",
+                --             sorting_strategy = "ascending",
+                --             layout_strategy = "horizontal",
+                --             layout_config = {
+                --                 horizontal = {
+                --                     width = 0.5,
+                --                     height = 0.4,
+                --                     preview_width = 0.6,
+                --                 },
+                --             },
+                --         }),
+                --     },
+                --     frecency = {
+                --         default_workspace = "CWD",
+                --         show_scores = true,
+                --         show_unindexed = true,
+                --         disable_devicons = false,
+                --         ignore_patterns = {
+                --             "*.git/*",
+                --             "*/tmp/*",
+                --             "*/lua-language-server/*",
+                --         },
+                --     },
+                -- },
             })
             telescope.load_extension("fzf")
             telescope.load_extension("ui-select")
