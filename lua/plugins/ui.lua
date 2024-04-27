@@ -65,7 +65,7 @@ return {
         longitude = 80.89, -- east is positive, west is negative
         day_callback = function()
           require("notify")("It's day time", "info")
-          vim.cmd("colorscheme catppuccino-latte")
+          vim.cmd("colorscheme catppuccin-latte")
         end, -- function that is called when day begins
         night_callback = function()
           require("notify")("It's night time", "info")
@@ -76,4 +76,29 @@ return {
       })
     end,
   },
+  --   {
+  --     "nvimdev/dashboard-nvim",
+  --     event = "VimEnter",
+  --     opts = function()
+  --       local logo = [[
+  --  ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗
+  --  ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║
+  --  ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║
+  --  ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║
+  --  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║
+  --  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝
+  --     ]]
+
+  --       logo = string.rep("\n", 8) .. logo .. "\n\n"
+
+  --       local opts = {
+  --         theme = "doom",
+  --         config = {
+  --           header = vim.split(logo, "\n"),
+  --         },
+  --       }
+
+  --       return opts
+  --     end,
+  --   },
 }
